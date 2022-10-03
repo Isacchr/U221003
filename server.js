@@ -1,13 +1,20 @@
 const http = require('http');
+const fs = require('fs');
 
 const hostname = '127.0.0.1';
 const port = 8080;
 
 const server = http.createServer((req,res) => {
 
-    res.statusCode = 200;
-    res.setHeader('Content-Type', 'text/html');
-    res.end('<h1>I am Alive</h1>');
+    fs.readFile('public/index.html', function(error, data) {
+
+        res.statusCode = 200;
+
+        res.setHeader('Content-Type', 'text/html');
+        res.write(data);
+        return res.end();
+
+    });
 
 });
 
